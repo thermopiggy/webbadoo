@@ -13,40 +13,36 @@
       --text:#111;
     }
 
-    /* Base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); overflow-x:hidden; padding-top:56px;
-      background: linear-gradient(270deg,#bfbfbf,#e6e6e6,#ffffff);
-      background-size: 600% 600%;
-      animation: gradientMove 20s ease infinite;
+      margin:0; font-family:Montserrat,sans-serif; color:var(--text);
+      overflow-x:hidden; padding-top:56px;
+      background:linear-gradient(270deg,#bfbfbf,#e6e6e6,#ffffff);
+      background-size:600% 600%; animation:gradientMove 20s ease infinite;
     }
     @keyframes gradientMove{
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
       100%{background-position:0% 50%}
     }
-    ::selection{background:#fff;color:#000}
 
     /* Topbar */
     .topbar{
       position:fixed; inset:0 0 auto 0; height:56px; z-index:1000;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      display:flex; align-items:center; justify-content:space-between;
       padding:.5rem 1rem; background:var(--glass-bg); backdrop-filter:blur(10px);
       border-bottom:1px solid var(--glass-brd);
     }
-    .brand{font-weight:700; letter-spacing:.3px}
+    .brand{font-weight:700}
     .nav a{
-      display:inline-block; padding:.45rem .9rem; margin-left:.25rem;
-      text-decoration:none; color:var(--text); border:1px solid var(--glass-brd);
-      border-radius:999px; background:rgba(0,0,0,.04);
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      margin-left:.25rem; padding:.45rem .9rem;
+      text-decoration:none; color:var(--text);
+      border:1px solid var(--glass-brd); border-radius:999px;
+      background:rgba(0,0,0,.04);
+      transition:.2s;
     }
-    .nav a:hover{transform:translateY(-1px); background:rgba(0,0,0,.08); border-color:#000}
+    .nav a:hover{background:rgba(0,0,0,.08); border-color:#000}
 
-    /* Hamburger (mobile only) */
+    /* Hamburger */
     .hamburger{display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd); background:rgba(0,0,0,.06)}
     .hamburger span{width:20px; height:2px; background:#111; position:relative; display:block; margin:0 auto}
     .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; width:20px; height:2px; background:#111}
@@ -56,27 +52,32 @@
     #mobileMenu{
       position:fixed; top:56px; left:0; right:0; z-index:999;
       background:var(--glass-bg); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--glass-brd); transform:translateY(-110%);
-      transition:transform .2s ease;
+      border-bottom:1px solid var(--glass-brd);
+      transform:translateY(-110%); transition:.2s ease;
     }
     #mobileMenu.open{transform:translateY(0)}
     #mobileMenu a{display:block; padding:1rem; text-decoration:none; color:var(--text); border-top:1px solid var(--glass-brd)}
 
     /* Hero */
-    header{position:relative; min-height:55vh; overflow:hidden; background:#000}
+    header{
+      position:relative; height:60vh; min-height:420px;
+      overflow:hidden; background:#000;
+    }
     header video.logo{
-      display:block !important; width:100%; height:100%; object-fit:cover; object-position:center;
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      display:block !important;
     }
     .hero-overlay{
-      position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      gap:.8rem; text-align:center; padding:1rem; pointer-events:none;
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:.8rem;
+      text-align:center; padding:1rem; pointer-events:none;
     }
     .hero-overlay h1{margin:0; font-size:clamp(1.6rem,3.8vw,2.6rem); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.45)}
-    .hero-overlay p{margin:.1rem 0 .4rem; font-size:clamp(.95rem,2.3vw,1.1rem); color:#f3f3f3; opacity:.95}
+    .hero-overlay p{margin:0; font-size:clamp(.95rem,2.3vw,1.1rem); color:#f3f3f3; opacity:.95}
     .btn-cta{
       pointer-events:auto; display:inline-block; padding:.75rem 1.25rem; border-radius:999px; font-weight:700; text-decoration:none; color:#fff;
       background:linear-gradient(135deg,#111,#3a3a3a); box-shadow:0 6px 18px rgba(0,0,0,.15);
-      transition:transform .18s ease, box-shadow .18s ease;
     }
     .btn-cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.18)}
 
@@ -94,7 +95,7 @@
       background:#fff; padding:.75rem 1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.05);
     }
     .project-item a{text-decoration:none; color:#000; font-weight:700}
-    .project-item img{width:60px; height:60px; object-fit:contain; transition:transform .2s ease}
+    .project-item img{width:60px; height:60px; object-fit:contain; transition:transform .2s}
     .project-item img:hover{transform:scale(1.05)}
 
     .cta{ text-align:center; margin:2rem 0 }
@@ -109,18 +110,7 @@
       .nav{display:none}
       .hamburger{display:flex; align-items:center; justify-content:center}
       #mobileMenu{top:52px}
-
-      header{min-height:48vh}
-      header video.logo{height:48vh}
-      .hero-overlay{gap:.6rem}
-      .hero-overlay h1{font-size:1.35rem}
-      .hero-overlay p{font-size:.95rem}
-      .btn-cta{padding:.65rem 1rem; font-size:.95rem}
-
-      .container{width:calc(100% - 24px); margin:12px auto; padding:1rem}
-      .projects{padding:0 12px}
-      .project-item{grid-template-columns:minmax(0,1fr) 44px; gap:.75rem}
-      .project-item img{width:44px; height:44px; justify-self:end}
+      header{height:48vh; min-height:360px}
     }
   </style>
 </head>
@@ -129,7 +119,7 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="brand">Connected.com</div>
-    <nav class="nav" aria-label="Главно меню">
+    <nav class="nav">
       <a href="#services">услуги</a>
       <a href="#projects">проекти</a>
       <a href="#contacts">контакти</a>
@@ -138,7 +128,7 @@
   </div>
 
   <!-- Mobile dropdown -->
-  <nav id="mobileMenu" aria-label="Мобилно меню">
+  <nav id="mobileMenu">
     <a href="#services">услуги</a>
     <a href="#projects">проекти</a>
     <a href="#contacts">контакти</a>
@@ -174,53 +164,47 @@
   <!-- Projects -->
   <section class="projects" id="projects">
     <h2>Изпълнени проекти</h2>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">LifeHouse</a>
-      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">
-        <img src="lifehouse.png" alt="QR код за LifeHouse" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">LifeHouse</a>
+      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">
+        <img src="lifehouse.png" alt="QR код за LifeHouse"/>
       </a>
     </div>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">Амигуруменичетата</a>
-      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">
-        <img src="qr1.png" alt="QR код за Амигуруменичетата" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">Амигуруменичетата</a>
+      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">
+        <img src="qr1.png" alt="QR код за Амигуруменичетата"/>
       </a>
     </div>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">Планински билки Даутов</a>
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">
-        <img src="qr2.png" alt="QR код за Планински билки Даутов" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">Планински билки Даутов</a>
+      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
+        <img src="qr2.png" alt="QR код за Планински билки Даутов"/>
       </a>
     </div>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">FreeStreamHub</a>
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">
-        <img src="qr3.png" alt="QR код за FreeStreamHub" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">FreeStreamHub</a>
+      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
+        <img src="qr3.png" alt="QR код за FreeStreamHub"/>
       </a>
     </div>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">Ауто Танев</a>
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">
-        <img src="qr4.png" alt="QR код за Ауто Танев" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">Ауто Танев</a>
+      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
+        <img src="qr4.png" alt="QR код за Ауто Танев"/>
       </a>
     </div>
-
     <div class="project-item">
-      <a href="https://thermopiggy.github.io/konyaka/" target="_blank" rel="noopener">Lord of the Drinks</a>
-      <a href="https://thermopiggy.github.io/konyaka/" target="_blank" rel="noopener">
-        <img src="qr-lod.png" alt="QR код за Lord of the Drinks" loading="lazy" width="60" height="60"/>
+      <a href="https://thermopiggy.github.io/konyaka/" target="_blank">Lord of the Drinks</a>
+      <a href="https://thermopiggy.github.io/konyaka/" target="_blank">
+        <img src="qr-lod.png" alt="QR код за Lord of the Drinks"/>
       </a>
     </div>
   </section>
 
   <!-- CTA -->
   <div class="cta">
-    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
+    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank">Попитай в WhatsApp</a>
   </div>
 
   <!-- Contacts -->
@@ -232,19 +216,15 @@
 
   <footer>&copy; 2025 – Уеб решения за малкия бизнес</footer>
 
-  <!-- Scripts -->
   <script>
     (function(){
-      const btn = document.getElementById('menuBtn');
-      const menu = document.getElementById('mobileMenu');
-      if(!btn || !menu) return;
-
-      const toggle = () => menu.classList.toggle('open');
-      btn.addEventListener('click', toggle);
-
-      menu.addEventListener('click', e => { if(e.target.tagName === 'A') menu.classList.remove('open'); });
-      window.addEventListener('keydown', e => { if(e.key === 'Escape') menu.classList.remove('open'); });
-      window.addEventListener('scroll', () => menu.classList.remove('open'), { passive:true });
+      const btn=document.getElementById('menuBtn');
+      const menu=document.getElementById('mobileMenu');
+      if(!btn||!menu) return;
+      btn.addEventListener('click',()=>menu.classList.toggle('open'));
+      menu.addEventListener('click',e=>{if(e.target.tagName==='A') menu.classList.remove('open');});
+      window.addEventListener('keydown',e=>{if(e.key==='Escape') menu.classList.remove('open');});
+      window.addEventListener('scroll',()=>menu.classList.remove('open'),{passive:true});
     })();
   </script>
 </body>
