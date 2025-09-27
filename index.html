@@ -86,7 +86,21 @@
       max-width:860px; margin:2rem auto; padding:2rem 1.25rem; background:#fff;
       box-shadow:0 0 20px rgba(0,0,0,.08); border-radius:12px;
     }
-    ul{padding-left:1.25rem}
+
+    /* Services grid */
+    .services-grid{
+      display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      margin-top:1.25rem;
+    }
+    .service-card{
+      background:#fff; border-radius:12px; padding:1rem; text-align:center;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);
+      transition:transform .16s ease, box-shadow .16s ease;
+    }
+    .service-card:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.1); }
+    .service-card .icon{ font-size:1.9rem; line-height:1; margin-bottom:.5rem; }
+    .service-card h3{ margin:.2rem 0 .25rem; font-size:1.05rem; }
+    .service-card p{ margin:0; font-size:.92rem; color:#555; }
 
     .projects{max-width:860px; margin:2rem auto; padding:0 12px}
     .projects h2{text-align:center}
@@ -151,14 +165,38 @@
   <!-- Services -->
   <section class="container" id="services">
     <h2>УСЛУГИ</h2>
-    <ul>
-      <li><strong>Изработка и поддръжка на уебсайт</strong></li>
-      <li><strong>AI чатбот</strong> – дизайн, интеграция, глас, аватар</li>
-      <li><strong>Бутон WhatsApp</strong> – изпраща цялата поръчка в съобщение</li>
-      <li><strong>Хостинг без месечни такси</strong> – GitHub Pages</li>
-      <li><strong>Оптимизация</strong> за мобилни устройства</li>
-      <li><strong>QR код</strong> – за меню, стикери или визитки</li>
-    </ul>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">💻</div>
+        <h3>Уебсайт</h3>
+        <p>Изработка и поддръжка на модерен сайт</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🤖</div>
+        <h3>AI чатбот</h3>
+        <p>Дизайн, интеграция, глас и аватар</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📲</div>
+        <h3>WhatsApp бутон</h3>
+        <p>Поръчка в едно съобщение</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">☁️</div>
+        <h3>Хостинг</h3>
+        <p>GitHub Pages – без месечни такси</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📱</div>
+        <h3>Оптимизация</h3>
+        <p>Перфектен изглед на мобилни</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🔗</div>
+        <h3>QR код</h3>
+        <p>Меню, стикери или визитки</p>
+      </div>
+    </div>
   </section>
 
   <!-- Projects -->
