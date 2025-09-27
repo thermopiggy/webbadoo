@@ -265,6 +265,39 @@ header video.logo{ object-fit: cover; max-height: none; }
   }
   header{ position: relative; }
 }
+/* Mobile nav */
+.hamburger{ display:none; }
+@media (max-width:768px){
+  .topbar{ padding:.5rem .75rem; }
+  .topbar .nav{ display:none; }            /* скриваме хор. нав на мобилно */
+  .hamburger{
+    display:flex; align-items:center; justify-content:center;
+    width:40px; height:40px; border-radius:10px;
+    border:1px solid var(--glass-brd); background: rgba(0,0,0,.06);
+  }
+  .hamburger span{
+    width:20px; height:2px; background:#111; position:relative; display:block;
+  }
+  .hamburger span::before,.hamburger span::after{
+    content:""; position:absolute; left:0; width:20px; height:2px; background:#111;
+  }
+  .hamburger span::before{ top:-6px; }
+  .hamburger span::after{ top:6px; }
+
+  /* падащо меню */
+  #mobileMenu{
+    position: fixed; top:56px; left:0; right:0; z-index:999;
+    background: var(--glass-bg); backdrop-filter: blur(12px);
+    border-bottom:1px solid var(--glass-brd);
+    transform: translateY(-110%); transition: transform .2s ease;
+  }
+  #mobileMenu.open{ transform: translateY(0); }
+  #mobileMenu a{
+    display:block; padding:1rem; text-decoration:none; color:#111;
+    border-top:1px solid var(--glass-brd);
+  }
+  body{ padding-top:56px; } /* височина на фикс. бар */
+}
 
   </style>
 </head>
@@ -278,6 +311,15 @@ header video.logo{ object-fit: cover; max-height: none; }
     <a href="#projects">проекти</a>
     <a href="#contacts">контакти</a>
   </nav>
+      <button class="hamburger" id="menuBtn" aria-label="Отвори меню">
+  <span></span>
+</button>
+<nav id="mobileMenu" aria-label="Мобилно меню">
+  <a href="#services">услуги</a>
+  <a href="#projects">проекти</a>
+  <a href="#contacts">контакти</a>
+</nav>
+
 </div>
 
     <video class="logo" autoplay muted loop playsinline>
@@ -386,5 +428,25 @@ header video.logo{ object-fit: cover; max-height: none; }
   <footer>
     &copy; 2025 – Уеб решения за малкия бизнес
   </footer>
+  <script>
+  (function(){
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if(!btn || !menu) return;
+
+    const toggle = () => menu.classList.toggle('open');
+    btn.addEventListener('click', toggle);
+
+    // затваряне при избор на линк
+    menu.addEventListener('click', e => {
+      if(e.target.tagName === 'A') menu.classList.remove('open');
+    });
+
+    // затваряне при ESC и при скрол
+    window.addEventListener('keydown', e => { if(e.key === 'Escape') menu.classList.remove('open'); });
+    window.addEventListener('scroll', () => menu.classList.remove('open'), { passive:true });
+  })();
+</script>
+
 </body>
 </html>
