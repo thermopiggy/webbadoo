@@ -102,15 +102,31 @@
     .service-card h3{ margin:.2rem 0 .25rem; font-size:1.05rem; }
     .service-card p{ margin:0; font-size:.92rem; color:#555; }
 
-    .projects{max-width:860px; margin:2rem auto; padding:0 12px}
-    .projects h2{text-align:center}
-    .project-item{
-      display:grid; grid-template-columns:1fr 60px; align-items:center; gap:1rem; margin-bottom:1.1rem;
-      background:#fff; padding:.75rem 1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.05);
+    /* Projects grid */
+    .projects{max-width:1100px; margin:2rem auto; padding:0 12px}
+    .projects h2{text-align:center; margin-bottom:1.5rem}
+    .projects-grid{
+      display:grid; gap:1.2rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     }
-    .project-item a{text-decoration:none; color:#000; font-weight:700}
-    .project-item img{width:60px; height:60px; object-fit:contain; transition:transform .2s}
-    .project-item img:hover{transform:scale(1.05)}
+    .project-card{
+      position:relative; overflow:hidden; border-radius:12px; background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.06); transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .project-card:hover{ transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.1); }
+    .project-card img{
+      width:100%; height:200px; object-fit:contain; display:block; background:#fafafa;
+      transition:transform .3s ease;
+    }
+    .project-card:hover img{ transform:scale(1.05); }
+    .project-card a.title{
+      display:block; text-align:center; padding:.75rem; font-weight:700; color:#000; text-decoration:none;
+    }
+    .overlay{
+      position:absolute; inset:0; background:rgba(0,0,0,.55);
+      color:#fff; display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:opacity .3s ease; font-size:1.1rem; font-weight:600;
+    }
+    .project-card:hover .overlay{ opacity:1; }
 
     .cta{ text-align:center; margin:2rem 0 }
     .cta a{ background:#25D366; color:#fff; text-decoration:none; padding:1rem 2rem; font-size:1.05rem; border-radius:10px; display:inline-block }
@@ -166,77 +182,61 @@
   <section class="container" id="services">
     <h2>УСЛУГИ</h2>
     <div class="services-grid">
-      <div class="service-card">
-        <div class="icon">💻</div>
-        <h3>Уебсайт</h3>
-        <p>Изработка и поддръжка на модерен сайт</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🤖</div>
-        <h3>AI чатбот</h3>
-        <p>Дизайн, интеграция, глас и аватар</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">📲</div>
-        <h3>WhatsApp бутон</h3>
-        <p>Поръчка в едно съобщение</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">☁️</div>
-        <h3>Хостинг</h3>
-        <p>GitHub Pages – без месечни такси</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">📱</div>
-        <h3>Оптимизация</h3>
-        <p>Перфектен изглед на мобилни</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🔗</div>
-        <h3>QR код</h3>
-        <p>Меню, стикери или визитки</p>
-      </div>
+      <div class="service-card"><div class="icon">💻</div><h3>Уебсайт</h3><p>Изработка и поддръжка на модерен сайт</p></div>
+      <div class="service-card"><div class="icon">🤖</div><h3>AI чатбот</h3><p>Дизайн, интеграция, глас и аватар</p></div>
+      <div class="service-card"><div class="icon">📲</div><h3>WhatsApp бутон</h3><p>Поръчка в едно съобщение</p></div>
+      <div class="service-card"><div class="icon">☁️</div><h3>Хостинг</h3><p>GitHub Pages – без месечни такси</p></div>
+      <div class="service-card"><div class="icon">📱</div><h3>Оптимизация</h3><p>Перфектен изглед на мобилни</p></div>
+      <div class="service-card"><div class="icon">🔗</div><h3>QR код</h3><p>Меню, стикери или визитки</p></div>
     </div>
   </section>
 
   <!-- Projects -->
   <section class="projects" id="projects">
     <h2>Изпълнени проекти</h2>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">LifeHouse</a>
-      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">
-        <img src="lifehouse.png" alt="QR код за LifeHouse"/>
-      </a>
-    </div>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">Амигуруменичетата</a>
-      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">
-        <img src="qr1.png" alt="QR код за Амигуруменичетата"/>
-      </a>
-    </div>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">Планински билки Даутов</a>
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
-        <img src="qr2.png" alt="QR код за Планински билки Даутов"/>
-      </a>
-    </div>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">FreeStreamHub</a>
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
-        <img src="qr3.png" alt="QR код за FreeStreamHub"/>
-      </a>
-    </div>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">Ауто Танев</a>
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
-        <img src="qr4.png" alt="QR код за Ауто Танев"/>
-      </a>
-    </div>
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/konyaka/" target="_blank">Lord of the Drinks</a>
-      <a href="https://thermopiggy.github.io/konyaka/" target="_blank">
-        <img src="qr-lod.png" alt="QR код за Lord of the Drinks"/>
-      </a>
+    <div class="projects-grid">
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">
+          <img src="lifehouse.png" alt="LifeHouse"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/LifeHouse/" class="title" target="_blank">LifeHouse</a>
+      </div>
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">
+          <img src="qr1.png" alt="Амигуруменичетата"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" class="title" target="_blank">Амигуруменичетата</a>
+      </div>
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
+          <img src="qr2.png" alt="Планински билки Даутов"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" class="title" target="_blank">Планински билки Даутов</a>
+      </div>
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
+          <img src="qr3.png" alt="FreeStreamHub"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/freestreamhub/" class="title" target="_blank">FreeStreamHub</a>
+      </div>
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
+          <img src="qr4.png" alt="Ауто Танев"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/auto-tanev/" class="title" target="_blank">Ауто Танев</a>
+      </div>
+      <div class="project-card">
+        <a href="https://thermopiggy.github.io/konyaka/" target="_blank">
+          <img src="qr-lod.png" alt="Lord of the Drinks"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/konyaka/" class="title" target="_blank">Lord of the Drinks</a>
+      </div>
     </div>
   </section>
 
