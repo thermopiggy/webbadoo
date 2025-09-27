@@ -95,7 +95,6 @@
     .service-card{
       background:#fff; border-radius:12px; padding:1rem; text-align:center;
       box-shadow:0 2px 12px rgba(0,0,0,.06);
-      transition:transform .16s ease, box-shadow .16s ease;
     }
     .service-card .icon{ font-size:1.9rem; line-height:1; margin-bottom:.5rem; }
     .service-card h3{ margin:.2rem 0 .25rem; font-size:1.05rem; }
@@ -113,17 +112,17 @@
     }
     .project-card:hover{ transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.1); }
     .project-card img{
-      width:100%; height:200px; object-fit:contain; display:block; background:#fafafa;
-      transition:transform .3s ease;
+      width:100%; height:220px; object-fit:contain; display:block; background:#fafafa;
+      transition:transform .25s ease;
     }
-    .project-card:hover img{ transform:scale(1.05); }
+    .project-card:hover img{ transform:scale(1.06); }
     .project-card a.title{
       display:block; text-align:center; padding:.75rem; font-weight:700; color:#000; text-decoration:none;
     }
     .overlay{
       position:absolute; inset:0; background:rgba(0,0,0,.55);
       color:#fff; display:flex; align-items:center; justify-content:center;
-      opacity:0; transition:opacity .3s ease; font-size:1.1rem; font-weight:600;
+      opacity:0; transition:opacity .25s ease; font-size:1.05rem; font-weight:700; z-index:2; pointer-events:none;
     }
     .project-card:hover .overlay{ opacity:1; }
 
@@ -131,6 +130,18 @@
     .cta a{ background:#25D366; color:#fff; text-decoration:none; padding:1rem 2rem; font-size:1.05rem; border-radius:10px; display:inline-block }
 
     footer{ text-align:center; font-size:.9rem; color:#777; margin:2.5rem 0 1rem }
+
+    /* ===== Scroll animations ===== */
+    .reveal{ opacity:0; transform:translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in{ opacity:1; transform:none; }
+    .reveal-up{ transform:translateY(24px); }
+    .reveal-right{ transform:translateX(24px); }
+    .reveal-left{ transform:translateX(-24px); }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+      .reveal,.reveal-up,.reveal-right,.reveal-left{ opacity:1 !important; transform:none !important}
+    }
 
     /* Mobile */
     @media (max-width:768px){
@@ -141,26 +152,12 @@
       #mobileMenu{top:52px}
       header{height:48vh; min-height:360px}
     }
-    /* --- Projects hover overlay --- */
-.project-card{ position:relative; overflow:hidden; border-radius:12px; }
-.project-card img{
-  width:100%; height:220px; object-fit:contain; display:block; background:#fafafa;
-  transition:transform .25s ease;
-}
-.overlay{
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  background:rgba(0,0,0,.55); color:#fff; font-weight:700; font-size:1.05rem;
-  opacity:0; transition:opacity .25s ease; z-index:2; pointer-events:none;
-}
-.project-card:hover .overlay{ opacity:1; }
-.project-card:hover img{ transform:scale(1.06); }
-
   </style>
 </head>
 <body>
 
   <!-- Topbar -->
-  <div class="topbar">
+  <div class="topbar reveal reveal-down">
     <div class="brand">Connected.com</div>
     <nav class="nav">
       <a href="#services">услуги</a>
@@ -185,97 +182,112 @@
     </video>
 
     <div class="hero-overlay">
-      <h1>Уеб решения за малкия бизнес</h1>
-      <p>Сайтове без месечни такси · AI чатботи · WhatsApp поръчки</p>
-      <a class="btn-cta" href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
+      <h1 class="reveal reveal-up">Уеб решения за малкия бизнес</h1>
+      <p class="reveal reveal-up">Сайтове без месечни такси · AI чатботи · WhatsApp поръчки</p>
+      <a class="btn-cta reveal reveal-up" href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
     </div>
   </header>
 
   <!-- Services -->
-  <section class="container" id="services">
+  <section class="container reveal reveal-up" id="services">
     <h2>УСЛУГИ</h2>
     <div class="services-grid">
-      <div class="service-card"><div class="icon">💻</div><h3>Уебсайт</h3><p>Изработка и поддръжка на модерен сайт</p></div>
-      <div class="service-card"><div class="icon">🤖</div><h3>AI чатбот</h3><p>Дизайн, интеграция, глас и аватар</p></div>
-      <div class="service-card"><div class="icon">📲</div><h3>WhatsApp бутон</h3><p>Поръчка в едно съобщение</p></div>
-      <div class="service-card"><div class="icon">☁️</div><h3>Хостинг</h3><p>GitHub Pages – без месечни такси</p></div>
-      <div class="service-card"><div class="icon">📱</div><h3>Оптимизация</h3><p>Перфектен изглед на мобилни</p></div>
-      <div class="service-card"><div class="icon">🔗</div><h3>QR код</h3><p>Меню, стикери или визитки</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">💻</div><h3>Уебсайт</h3><p>Изработка и поддръжка на модерен сайт</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">🤖</div><h3>AI чатбот</h3><p>Дизайн, интеграция, глас и аватар</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">📲</div><h3>WhatsApp бутон</h3><p>Поръчка в едно съобщение</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">☁️</div><h3>Хостинг</h3><p>GitHub Pages – без месечни такси</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">📱</div><h3>Оптимизация</h3><p>Перфектен изглед на мобилни</p></div>
+      <div class="service-card reveal reveal-up"><div class="icon">🔗</div><h3>QR код</h3><p>Меню, стикери или визитки</p></div>
     </div>
   </section>
 
   <!-- Projects -->
   <section class="projects" id="projects">
-    <h2>Изпълнени проекти</h2>
+    <h2 class="reveal reveal-up">Изпълнени проекти</h2>
     <div class="projects-grid">
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">
-          <img src="lifehouse.png" alt="LifeHouse"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">
+          <img src="lifehouse.png" alt="LifeHouse" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/LifeHouse/" class="title" target="_blank">LifeHouse</a>
+        <a href="https://thermopiggy.github.io/LifeHouse/" class="title" target="_blank" rel="noopener">LifeHouse</a>
       </div>
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">
-          <img src="qr1.png" alt="Амигуруменичетата"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">
+          <img src="qr1.png" alt="Амигуруменичетата" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" class="title" target="_blank">Амигуруменичетата</a>
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" class="title" target="_blank" rel="noopener">Амигуруменичетата</a>
       </div>
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
-          <img src="qr2.png" alt="Планински билки Даутов"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">
+          <img src="qr2.png" alt="Планински билки Даутов" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" class="title" target="_blank">Планински билки Даутов</a>
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" class="title" target="_blank" rel="noopener">Планински билки Даутов</a>
       </div>
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
-          <img src="qr3.png" alt="FreeStreamHub"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">
+          <img src="qr3.png" alt="FreeStreamHub" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/freestreamhub/" class="title" target="_blank">FreeStreamHub</a>
+        <a href="https://thermopiggy.github.io/freestreamhub/" class="title" target="_blank" rel="noopener">FreeStreamHub</a>
       </div>
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
-          <img src="qr4.png" alt="Ауто Танев"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">
+          <img src="qr4.png" alt="Ауто Танев" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/auto-tanev/" class="title" target="_blank">Ауто Танев</a>
+        <a href="https://thermopiggy.github.io/auto-tanev/" class="title" target="_blank" rel="noopener">Ауто Танев</a>
       </div>
-      <div class="project-card">
-        <a href="https://thermopiggy.github.io/konyaka/" target="_blank">
-          <img src="qr-lod.png" alt="Lord of the Drinks"/>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/konyaka/" target="_blank" rel="noopener">
+          <img src="qr-lod.png" alt="Lord of the Drinks" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
-        <a href="https://thermopiggy.github.io/konyaka/" class="title" target="_blank">Lord of the Drinks</a>
+        <a href="https://thermopiggy.github.io/konyaka/" class="title" target="_blank" rel="noopener">Lord of the Drinks</a>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta">
-    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank">Попитай в WhatsApp</a>
+  <div class="cta reveal reveal-up">
+    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
   </div>
 
   <!-- Contacts -->
-  <section id="contacts" class="container" style="text-align:center">
+  <section id="contacts" class="container reveal reveal-up" style="text-align:center">
     <h2 style="margin-bottom:1rem;">Контакти</h2>
     <p><a href="mailto:connected@hotmail.com">connected@hotmail.com</a></p>
     <p><a href="tel:+359988823462">+359 988 823 462</a></p>
   </section>
 
-  <footer>&copy; 2025 – Уеб решения за малкия бизнес</footer>
+  <footer class="reveal reveal-up">&copy; 2025 – Уеб решения за малкия бизнес</footer>
 
   <script>
     (function(){
+      // mobile menu
       const btn=document.getElementById('menuBtn');
       const menu=document.getElementById('mobileMenu');
-      if(!btn||!menu) return;
-      btn.addEventListener('click',()=>menu.classList.toggle('open'));
-      menu.addEventListener('click',e=>{if(e.target.tagName==='A') menu.classList.remove('open');});
-      window.addEventListener('keydown',e=>{if(e.key==='Escape') menu.classList.remove('open');});
-      window.addEventListener('scroll',()=>menu.classList.remove('open'),{passive:true});
+      if(btn && menu){
+        btn.addEventListener('click',()=>menu.classList.toggle('open'));
+        menu.addEventListener('click',e=>{if(e.target.tagName==='A') menu.classList.remove('open');});
+        window.addEventListener('keydown',e=>{if(e.key==='Escape') menu.classList.remove('open');});
+        window.addEventListener('scroll',()=>menu.classList.remove('open'),{passive:true});
+      }
+
+      // scroll reveal
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!prefersReduced && 'IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(en=>{
+            if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      }else{
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      }
     })();
   </script>
 </body>
