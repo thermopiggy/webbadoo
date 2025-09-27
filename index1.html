@@ -1,306 +1,251 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connected.com</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
 
   <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: #111;
-      position: relative;
-      overflow-x: hidden;
-      overflow-y: auto;
+    :root{
+      --glass-bg: rgba(255,255,255,.6);
+      --glass-brd: rgba(0,0,0,.08);
+      --text:#111;
+    }
 
-      background: linear-gradient(270deg, #ff6b6b, #f7d794, #1dd1a1);
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); overflow-x:hidden; padding-top:56px;
+      background: linear-gradient(270deg,#bfbfbf,#e6e6e6,#ffffff);
       background-size: 600% 600%;
       animation: gradientMove 20s ease infinite;
     }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
+    ::selection{background:#fff;color:#000}
 
-    body::before {
-      content: "0101010011010100110010101010100110";
-      position: absolute;
-      top: 0;
-      left: 0;
-      font-size: 14vw;
-      color: rgba(255,255,255,0.015);
-      animation: binmove 20s linear infinite;
-      white-space: nowrap;
-      z-index: 0;
+    /* Topbar */
+    .topbar{
+      position:fixed; inset:0 0 auto 0; height:56px; z-index:1000;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:.5rem 1rem; background:var(--glass-bg); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--glass-brd);
     }
-
-    @keyframes binmove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+    .brand{font-weight:700; letter-spacing:.3px}
+    .nav a{
+      display:inline-block; padding:.45rem .9rem; margin-left:.25rem;
+      text-decoration:none; color:var(--text); border:1px solid var(--glass-brd);
+      border-radius:999px; background:rgba(0,0,0,.04);
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
+    .nav a:hover{transform:translateY(-1px); background:rgba(0,0,0,.08); border-color:#000}
 
-    ::selection {
-      background: white;
-      color: black;
+    /* Hamburger (mobile only) */
+    .hamburger{display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd); background:rgba(0,0,0,.06)}
+    .hamburger span{width:20px; height:2px; background:#111; position:relative; display:block; margin:0 auto}
+    .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; width:20px; height:2px; background:#111}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    /* Mobile dropdown */
+    #mobileMenu{
+      position:fixed; top:56px; left:0; right:0; z-index:999;
+      background:var(--glass-bg); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--glass-brd); transform:translateY(-110%);
+      transition:transform .2s ease;
     }
+    #mobileMenu.open{transform:translateY(0)}
+    #mobileMenu a{display:block; padding:1rem; text-decoration:none; color:var(--text); border-top:1px solid var(--glass-brd)}
 
-    header {
-      background: white;
-      text-align: center;
-      padding: 2rem 1rem 3rem 1rem;
-      position: relative;
+    /* Hero */
+    header{position:relative; min-height:55vh; overflow:hidden; background:#000}
+    header video.logo{
+      display:block !important; width:100%; height:100%; object-fit:cover; object-position:center;
     }
-
-    header video.logo {
-      display: block;
-      width: 100%;       /* винаги цяла ширина */
-      height: auto;      /* автоматична височина */
-      max-height: none;  /* няма ограничение */
-      margin: 0 auto 1rem;
-      background: #000;
-      box-shadow: 0 0 20px rgba(255,255,255,0.4),
-                  0 0 40px rgba(255,255,255,0.2);
+    .hero-overlay{
+      position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.8rem; text-align:center; padding:1rem; pointer-events:none;
     }
-
- 
-    
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      color: black;
-      text-shadow:
-        0 0 8px rgba(0,0,0,0.2),
-        0 0 16px rgba(0,0,0,0.1);
+    .hero-overlay h1{margin:0; font-size:clamp(1.6rem,3.8vw,2.6rem); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.45)}
+    .hero-overlay p{margin:.1rem 0 .4rem; font-size:clamp(.95rem,2.3vw,1.1rem); color:#f3f3f3; opacity:.95}
+    .btn-cta{
+      pointer-events:auto; display:inline-block; padding:.75rem 1.25rem; border-radius:999px; font-weight:700; text-decoration:none; color:#fff;
+      background:linear-gradient(135deg,#111,#3a3a3a); box-shadow:0 6px 18px rgba(0,0,0,.15);
+      transition:transform .18s ease, box-shadow .18s ease;
     }
+    .btn-cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.18)}
 
-    .nav-buttons {
-      margin-top: 1.5rem;
-      z-index: 2;
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0 1rem;
+    /* Sections */
+    .container{
+      max-width:860px; margin:2rem auto; padding:2rem 1.25rem; background:#fff;
+      box-shadow:0 0 20px rgba(0,0,0,.08); border-radius:12px;
     }
+    ul{padding-left:1.25rem}
 
-    .nav-buttons a {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: #f0f0f0;
-      color: black;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      text-align: center;
-      transition: 0.3s;
-      border: 1px solid #ddd;
+    .projects{max-width:860px; margin:2rem auto; padding:0 12px}
+    .projects h2{text-align:center}
+    .project-item{
+      display:grid; grid-template-columns:1fr 60px; align-items:center; gap:1rem; margin-bottom:1.1rem;
+      background:#fff; padding:.75rem 1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.05);
     }
+    .project-item a{text-decoration:none; color:#000; font-weight:700}
+    .project-item img{width:60px; height:60px; object-fit:contain; transition:transform .2s ease}
+    .project-item img:hover{transform:scale(1.05)}
 
-    .nav-buttons a:hover {
-      background: #e0e0e0;
-      color: black;
-      border-color: black;
+    .cta{ text-align:center; margin:2rem 0 }
+    .cta a{ background:#25D366; color:#fff; text-decoration:none; padding:1rem 2rem; font-size:1.05rem; border-radius:10px; display:inline-block }
+
+    footer{ text-align:center; font-size:.9rem; color:#777; margin:2.5rem 0 1rem }
+
+    /* Mobile */
+    @media (max-width:768px){
+      body{padding-top:52px}
+      .topbar{height:52px; padding:.5rem .75rem}
+      .nav{display:none}
+      .hamburger{display:flex; align-items:center; justify-content:center}
+      #mobileMenu{top:52px}
+
+      header{min-height:48vh}
+      header video.logo{height:48vh}
+      .hero-overlay{gap:.6rem}
+      .hero-overlay h1{font-size:1.35rem}
+      .hero-overlay p{font-size:.95rem}
+      .btn-cta{padding:.65rem 1rem; font-size:.95rem}
+
+      .container{width:calc(100% - 24px); margin:12px auto; padding:1rem}
+      .projects{padding:0 12px}
+      .project-item{grid-template-columns:minmax(0,1fr) 44px; gap:.75rem}
+      .project-item img{width:44px; height:44px; justify-self:end}
     }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem 1rem;
-      background: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      color: #111;
-    }
-
-    .highlight {
-      color: black;
-      font-weight: bold;
-    }
-
-    ul {
-      padding-left: 1.5rem;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .cta a {
-      background: #25D366;
-      color: white;
-      text-decoration: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      display: inline-block;
-    }
-
-    .projects {
-      margin-top: 3rem;
-      text-align: center;
-    }
-
-    .project-item {
-      display: grid;
-      grid-template-columns: 1fr 60px;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-item a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    .project-item img {
-      height: 60px;
-      width: 60px;
-      object-fit: contain;
-      transition: transform 0.2s ease;
-    }
-
-    .project-item img:hover {
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 4rem;
-      padding: 1rem;
-    }
-    #projects {
-  text-align: center;
-}
-
-#projects h2,
-#projects p {
-  text-align: center;
-}
-@media (max-width: 768px) {
-  header {
-    padding: 0 0 1rem 0;             /* маха страничния падинг */
-  }
-  header video.logo {
-    width: 100vw;                    /* реално цялата ширина на екрана */
-    max-width: 100vw;
-    height: auto;
-    margin: 0 calc(50% - 50vw) 1rem; /* изкарва видеото до самите ръбове */
-    box-shadow: none;                /* по желание – без ореол на мобилно */
-    background: transparent;         /* да не личи черно при зареждане */
-  }
-}
-@media (min-width: 1024px) {
-  header video.logo {
-    display: none;  /* не заема място */
-  }
-}
-/* grayscale-only animated background */
-body {
-  background: linear-gradient(270deg, #bfbfbf, #e6e6e6, #ffffff);
-  background-size: 600% 600%;
-  animation: gradientMove 20s ease infinite;
-}
-
   </style>
 </head>
-
 <body>
-  <header>
-    <video class="logo" autoplay muted loop playsinline>
-      <source src="0823.mp4" type="video/mp4">
-      Вашият браузър не поддържа видео.
-    </video>
-    <h1>Connected.com</h1>
-    <div class="nav-buttons">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="brand">Connected.com</div>
+    <nav class="nav" aria-label="Главно меню">
       <a href="#services">услуги</a>
       <a href="#projects">проекти</a>
       <a href="#contacts">контакти</a>
+    </nav>
+    <button class="hamburger" id="menuBtn" aria-label="Отвори меню"><span></span></button>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <nav id="mobileMenu" aria-label="Мобилно меню">
+    <a href="#services">услуги</a>
+    <a href="#projects">проекти</a>
+    <a href="#contacts">контакти</a>
+  </nav>
+
+  <!-- Hero -->
+  <header>
+    <video class="logo" autoplay muted loop playsinline>
+      <source src="0823.mp4" type="video/mp4"/>
+      Вашият браузър не поддържа видео.
+    </video>
+
+    <div class="hero-overlay">
+      <h1>Уеб решения за малкия бизнес</h1>
+      <p>Сайтове без месечни такси · AI чатботи · WhatsApp поръчки</p>
+      <a class="btn-cta" href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
     </div>
   </header>
 
-  <div class="container" id="services">
+  <!-- Services -->
+  <section class="container" id="services">
     <h2>УСЛУГИ</h2>
     <ul>
-      <li><strong>изработка и поддръжка на уебсайт</strong></li>
+      <li><strong>Изработка и поддръжка на уебсайт</strong></li>
       <li><strong>AI чатбот</strong> – дизайн, интеграция, глас, аватар</li>
       <li><strong>Бутон WhatsApp</strong> – изпраща цялата поръчка в съобщение</li>
       <li><strong>Хостинг без месечни такси</strong> – GitHub Pages</li>
       <li><strong>Оптимизация</strong> за мобилни устройства</li>
       <li><strong>QR код</strong> – за меню, стикери или визитки</li>
     </ul>
-  </div>
-
-  <div class="projects" id="projects">
-    <h2>Изпълнени проекти</h2>
-
-    <div class="project">
-  <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank">
-    <img src="lifehouse.png" alt="LifeHouse QR" class="qr">
-    <p>LifeHouse</p>
-  </a>
-</div>
-
-          Амигуруменичетата
-      </a>
-      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank">
-        <img src="qr1.png" alt="QR код за Амигуруменичетата" />
-      </a>
-    </div>
-
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
-           Планински билки Даутов
-      </a>
-      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank">
-        <img src="qr2.png" alt="QR код за Планински билки Даутов" />
-      </a>
-    </div>
-
-    <div class="project-item">
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
-            FreeStreamHub
-      </a>
-      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank">
-        <img src="qr3.png" alt="QR код за FreeStreamHub" />
-      </a>
-    </div>
-        <div class="project-item">
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
-           Ауто Танев
-      </a>
-      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank">
-        <img src="qr4.png" alt="QR код за Ауто Танев" />
-      </a>
-    </div>
-
-  </div>
-
-  <div class="cta">
-    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank">
-      поипитай в WhatsApp
-    </a>
-  </div>
-
-  <section id="contacts" style="padding: 2rem; background: #f4f4f4; text-align: center;">
-    <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Контакти</h2>
-    <p>📧 Email: <a href="mailto:connected@hotmail.com">connected@hotmail.com</a></p>
-    <p>📞 Телефон: <a href="tel:+359988823462">+359 988 823 462</a></p>
   </section>
 
-  <footer>
-    &copy; 2025 – Уеб решения за малкия бизнес
-  </footer>
+  <!-- Projects -->
+  <section class="projects" id="projects">
+    <h2>Изпълнени проекти</h2>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">LifeHouse</a>
+      <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">
+        <img src="lifehouse.png" alt="QR код за LifeHouse" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">Амигуруменичетата</a>
+      <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">
+        <img src="qr1.png" alt="QR код за Амигуруменичетата" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">Планински билки Даутов</a>
+      <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">
+        <img src="qr2.png" alt="QR код за Планински билки Даутов" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">FreeStreamHub</a>
+      <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">
+        <img src="qr3.png" alt="QR код за FreeStreamHub" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">Ауто Танев</a>
+      <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">
+        <img src="qr4.png" alt="QR код за Ауто Танев" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+
+    <div class="project-item">
+      <a href="https://thermopiggy.github.io/konyaka/" target="_blank" rel="noopener">Lord of the Drinks</a>
+      <a href="https://thermopiggy.github.io/konyaka/" target="_blank" rel="noopener">
+        <img src="qr-lod.png" alt="QR код за Lord of the Drinks" loading="lazy" width="60" height="60"/>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
+  </div>
+
+  <!-- Contacts -->
+  <section id="contacts" class="container" style="text-align:center">
+    <h2 style="margin-bottom:1rem;">Контакти</h2>
+    <p><a href="mailto:connected@hotmail.com">connected@hotmail.com</a></p>
+    <p><a href="tel:+359988823462">+359 988 823 462</a></p>
+  </section>
+
+  <footer>&copy; 2025 – Уеб решения за малкия бизнес</footer>
+
+  <!-- Scripts -->
+  <script>
+    (function(){
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if(!btn || !menu) return;
+
+      const toggle = () => menu.classList.toggle('open');
+      btn.addEventListener('click', toggle);
+
+      menu.addEventListener('click', e => { if(e.target.tagName === 'A') menu.classList.remove('open'); });
+      window.addEventListener('keydown', e => { if(e.key === 'Escape') menu.classList.remove('open'); });
+      window.addEventListener('scroll', () => menu.classList.remove('open'), { passive:true });
+    })();
+  </script>
 </body>
 </html>
