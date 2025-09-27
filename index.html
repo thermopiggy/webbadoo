@@ -203,15 +203,85 @@
         display: none;
       }
     }
+    :root{
+  --glass-bg: rgba(255,255,255,.6);
+  --glass-brd: rgba(0,0,0,.06);
+}
+
+body{ padding-top: 56px; } /* заради фиксирания топбар */
+
+.topbar{
+  position: fixed; inset: 0 0 auto 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .5rem 1rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-brd);
+}
+.topbar .brand{ font-weight: 700; letter-spacing: .3px; }
+.topbar .nav a{
+  display:inline-block; margin-left:.5rem; padding:.45rem .9rem;
+  border-radius:999px; background: rgba(0,0,0,.04);
+  border:1px solid var(--glass-brd); text-decoration:none; color:#111;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.topbar .nav a:hover{ transform: translateY(-1px); background: rgba(0,0,0,.08); border-color:#111; }
+
+.nav-buttons{ display:none !important; } /* скриваме старите бутони в header */
+
+header{ min-height: clamp(360px, 55vh, 720px); }
+header video.logo{ object-fit: cover; max-height: none; }
+.hero-overlay{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:.9rem; text-align:center;
+  padding: 1rem; z-index: 1; pointer-events:none;
+}
+.hero-overlay h1{
+  margin:0; font-size:clamp(1.6rem, 3.8vw, 2.6rem); color:#000;
+  text-shadow: 0 1px 2px rgba(255,255,255,.6);
+}
+.hero-overlay p{ margin:.1rem 0 .4rem; opacity:.85; font-size:clamp(.95rem, 2.3vw, 1.1rem); }
+
+.btn-cta{
+  pointer-events:auto;
+  display:inline-block; padding:.75rem 1.25rem; border-radius:999px;
+  font-weight:700; text-decoration:none; color:#fff;
+  background: linear-gradient(135deg,#111,#3a3a3a);
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+.btn-cta:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+@media (max-width:768px){
+  .topbar{ padding:.5rem .75rem; }
+  body{ padding-top: 52px; }
+}
+
   </style>
 </head>
 
 <body>
   <header>
+    <div class="topbar">
+  <div class="brand">Connected.com</div>
+  <nav class="nav">
+    <a href="#services">услуги</a>
+    <a href="#projects">проекти</a>
+    <a href="#contacts">контакти</a>
+  </nav>
+</div>
+
     <video class="logo" autoplay muted loop playsinline>
       <source src="0823.mp4" type="video/mp4">
       Вашият браузър не поддържа видео.
     </video>
+    <div class="hero-overlay">
+  <h1>Уеб решения за малкия бизнес</h1>
+  <p>Сайтове без месечни такси · AI чатботи · WhatsApp поръчки</p>
+  <a class="btn-cta" href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank">
+    Попитай в WhatsApp
+  </a>
+</div>
+
     <h1>Connected.com</h1>
     <div class="nav-buttons">
       <a href="#services">услуги</a>
