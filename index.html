@@ -9,7 +9,6 @@
 
   <style>
     :root{
-      /* LIGHT */
       --bg-grad-a:#bfbfbf;
       --bg-grad-b:#e6e6e6;
       --bg-grad-c:#ffffff;
@@ -23,7 +22,6 @@
       --whatsapp:#25D366;
     }
     .theme-dark{
-      /* DARK */
       --bg-grad-a:#0f1216;
       --bg-grad-b:#141922;
       --bg-grad-c:#0e1014;
@@ -37,7 +35,6 @@
       --whatsapp:#1faa5a;
     }
 
-    /* Base */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -49,7 +46,6 @@
     @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     ::selection{background:#fff;color:#000}
 
-    /* Topbar */
     .topbar{
       position:fixed; inset:0 0 auto 0; height:56px; z-index:1000;
       display:flex; align-items:center; justify-content:space-between; gap:12px;
@@ -67,14 +63,12 @@
     .nav a:hover{transform:translateY(-1px); background:rgba(0,0,0,.08); border-color:#000}
     .theme-dark .nav a:hover{background:rgba(255,255,255,.12); border-color:#fff}
 
-    /* Hamburger */
     .hamburger{display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd); background:rgba(0,0,0,.06)}
     .theme-dark .hamburger{background:rgba(255,255,255,.06)}
     .hamburger span{width:20px; height:2px; background:var(--text); position:relative; display:block; margin:0 auto}
     .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text)}
     .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
 
-    /* Theme toggle */
     .theme-toggle{
       display:inline-flex; align-items:center; justify-content:center;
       width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd);
@@ -83,7 +77,6 @@
     .theme-dark .theme-toggle{background:rgba(255,255,255,.06)}
     .theme-toggle svg{width:20px; height:20px; fill:var(--text)}
 
-    /* Mobile dropdown */
     #mobileMenu{
       position:fixed; top:56px; left:0; right:0; z-index:999;
       background:var(--glass-bg); backdrop-filter:blur(12px);
@@ -93,7 +86,6 @@
     #mobileMenu.open{transform:translateY(0)}
     #mobileMenu a{display:block; padding:1rem; text-decoration:none; color:var(--text); border-top:1px solid var(--glass-brd)}
 
-    /* Hero */
     header{position:relative; height:60vh; min-height:420px; overflow:hidden; background:#000}
     header video.logo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block !important}
     .hero-overlay{
@@ -109,13 +101,12 @@
     }
     .btn-cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.18)}
 
-    /* Sections */
     .container{
       max-width:860px; margin:2rem auto; padding:2rem 1.25rem; background:var(--card);
       box-shadow:0 0 20px rgba(0,0,0,.08); border-radius:12px;
     }
     .theme-dark .container{box-shadow:0 0 20px rgba(0,0,0,.4)}
-    /* Services grid */
+
     .services-grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:1.25rem;}
     .service-card{background:var(--card); border-radius:12px; padding:1rem; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.06)}
     .theme-dark .service-card{box-shadow:0 2px 12px rgba(0,0,0,.5)}
@@ -123,7 +114,6 @@
     .service-card h3{margin:.2rem 0 .25rem; font-size:1.05rem}
     .service-card p{margin:0; font-size:.92rem; color:var(--muted)}
 
-    /* Projects grid */
     .projects{max-width:1100px; margin:2rem auto; padding:0 12px}
     .projects h2{text-align:center; margin-bottom:1.5rem}
     .projects-grid{display:grid; gap:1.2rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -143,7 +133,18 @@
 
     footer{ text-align:center; font-size:.9rem; color:var(--muted); margin:2.5rem 0 1rem }
 
-    /* Scroll animations */
+    .contact-buttons{display:flex; flex-direction:column; gap:.6rem; margin-bottom:1.2rem;}
+    .btn-contact{display:inline-block; padding:.7rem 1rem; border-radius:8px; background:transparent; border:1px solid var(--glass-brd); text-decoration:none; color:var(--text); font-weight:500; transition:.2s ease;}
+    .btn-contact:hover{background:var(--text); color:#fff;}
+
+    .social-buttons{display:flex; justify-content:center; gap:1rem;}
+    .btn-social{width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--glass-brd); transition:.3s ease;}
+    .btn-social svg{width:22px; height:22px; fill:var(--muted); transition:.3s ease;}
+    .btn-social.fb:hover{background:#1877F2; border-color:#1877F2;}
+    .btn-social.fb:hover svg{fill:#fff;}
+    .btn-social.ig:hover{background:#E4405F; border-color:#E4405F;}
+    .btn-social.ig:hover svg{fill:#fff;}
+
     .reveal{ opacity:0; transform:translateY(24px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in{ opacity:1; transform:none; }
     .reveal-up{ transform:translateY(24px); }
@@ -154,7 +155,6 @@
       .reveal,.reveal-up,.reveal-right,.reveal-left{ opacity:1 !important; transform:none !important}
     }
 
-    /* Mobile */
     @media (max-width:768px){
       body{padding-top:52px}
       .topbar{height:52px; padding:.5rem .75rem}
@@ -163,41 +163,10 @@
       #mobileMenu{top:52px}
       header{height:48vh; min-height:360px}
     }
-    .contact-buttons{
-  display:flex; flex-direction:column; gap:.6rem; margin-bottom:1.2rem;
-}
-.btn-contact{
-  display:inline-block; padding:.7rem 1rem; border-radius:8px;
-  background:transparent; border:1px solid var(--glass-brd);
-  text-decoration:none; color:var(--text); font-weight:500;
-  transition:.2s ease;
-}
-.btn-contact:hover{
-  background:var(--text); color:#fff;
-}
-
-.social-buttons{
-  display:flex; justify-content:center; gap:1rem;
-}
-.btn-social{
-  width:44px; height:44px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  background:transparent; border:1px solid var(--glass-brd);
-  transition:.3s ease;
-}
-.btn-social svg{
-  width:22px; height:22px; fill:var(--muted); transition:.3s ease;
-}
-.btn-social.fb:hover{background:#1877F2; border-color:#1877F2;}
-.btn-social.fb:hover svg{fill:#fff;}
-.btn-social.ig:hover{background:#E4405F; border-color:#E4405F;}
-.btn-social.ig:hover svg{fill:#fff;}
-
   </style>
 </head>
 <body>
 
-  <!-- Topbar -->
   <div class="topbar reveal reveal-down">
     <div class="brand">Connected.com</div>
     <nav class="nav" aria-label="Главно меню">
@@ -207,7 +176,6 @@
     </nav>
     <div style="display:flex; gap:.5rem; align-items:center">
       <button class="theme-toggle" id="themeBtn" aria-label="Превключи тема">
-        <!-- sun/moon -->
         <svg id="iconSun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm16 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1ZM5.636 5.636a1 1 0 0 1 1.414 0l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414Zm10.607 10.607a1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414Zm0-9.193a1 1 0 0 1 1.414-1.414l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707ZM5.636 17.364a1 1 0 0 1 1.414 0l.707.707A1 1 0 0 1 6.343 19.485l-.707-.707a1 1 0 0 1 0-1.414Z"/></svg>
         <svg id="iconMoon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
       </button>
@@ -215,28 +183,24 @@
     </div>
   </div>
 
-  <!-- Mobile dropdown -->
   <nav id="mobileMenu" aria-label="Мобилно меню">
     <a href="#services">услуги</a>
     <a href="#projects">проекти</a>
     <a href="#contacts">контакти</a>
   </nav>
 
-  <!-- Hero -->
   <header>
     <video class="logo" autoplay muted loop playsinline>
       <source src="0823.mp4" type="video/mp4"/>
       Вашият браузър не поддържа видео.
     </video>
-
     <div class="hero-overlay">
       <h1 class="reveal reveal-up">Уеб решения за малкия бизнес</h1>
-      <p class="reveal reveal-up"(сайтове с пинизчета)</p>
+      <p class="reveal reveal-up">Сайтове без месечни такси · AI чатботи · WhatsApp поръчки</p>
       <a class="btn-cta reveal reveal-up" href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
     </div>
   </header>
 
-  <!-- Services -->
   <section class="container reveal reveal-up" id="services">
     <h2>УСЛУГИ</h2>
     <div class="services-grid">
@@ -249,7 +213,6 @@
     </div>
   </section>
 
-  <!-- Projects -->
   <section class="projects" id="projects">
     <h2 class="reveal reveal-up">Изпълнени проекти</h2>
     <div class="projects-grid">
@@ -298,45 +261,35 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <div class="cta reveal reveal-up">
     <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
   </div>
 
-<section id="contacts" class="container reveal reveal-up" style="text-align:center">
-  <h2 style="margin-bottom:1rem;">Контакти</h2>
-
-  <div class="contact-buttons">
-    <a href="mailto:connected@hotmail.com" class="btn-contact">connected@hotmail.com</a>
-    <a href="tel:+359988823462" class="btn-contact">+359 988 823 462</a>
-  </div>
-
-  <div class="social-buttons">
-    <a href="https://facebook.com/" target="_blank" class="btn-social fb" aria-label="Facebook">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 5 3.657 9.128 8.438 9.878v-6.987H8.078v-2.89h2.36V9.845c0-2.334 1.392-3.62 3.52-3.62.996 0 2.034.177 2.034.177v2.24h-1.146c-1.132 0-1.486.704-1.486 1.428v1.714h2.528l-.404 2.89h-2.124v6.987C18.343 21.128 22 17 22 12z"/>
-      </svg>
-    </a>
-    <a href="https://instagram.com/" target="_blank" class="btn-social ig" aria-label="Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.25a1.25 1.25 0 11-2.501 0 1.25 1.25 0 012.501 0z"/>
-      </svg>
-    </a>
-  </div>
-</section>
-
+  <section id="contacts" class="container reveal reveal-up" style="text-align:center">
+    <h2 style="margin-bottom:1rem;">Контакти</h2>
+    <div class="contact-buttons">
+      <a href="mailto:connected@hotmail.com" class="btn-contact">connected@hotmail.com</a>
+      <a href="tel:+359988823462" class="btn-contact">+359 988 823 462</a>
+    </div>
+    <div class="social-buttons">
+      <a href="https://facebook.com/" target="_blank" class="btn-social fb" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 5 3.657 9.128 8.438 9.878v-6.987H8.078v-2.89h2.36V9.845c0-2.334 1.392-3.62 3.52-3.62.996 0 2.034.177 2.034.177v2.24h-1.146c-1.132 0-1.486.704-1.486 1.428v1.714h2.528l-.404 2.89h-2.124v6.987C18.343 21.128 22 17 22 12z"/></svg>
+      </a>
+      <a href="https://instagram.com/" target="_blank" class="btn-social ig" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.25a1.25 1.25 0 11-2.501 0 1.25 1.25 0 012.501 0z"/></svg>
+      </a>
+    </div>
+  </section>
 
   <footer class="reveal reveal-up">&copy; 2025 – Уеб решения за малкия бизнес</footer>
 
   <script>
     (function(){
-      // theme init
       const root = document.documentElement;
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       if(saved === 'dark' || (!saved && prefersDark)) root.classList.replace('theme-light','theme-dark');
 
-      // theme toggle
       const btnTheme = document.getElementById('themeBtn');
       const iconSun = document.getElementById('iconSun');
       const iconMoon = document.getElementById('iconMoon');
@@ -353,7 +306,6 @@
         syncIcons();
       });
 
-      // mobile menu
       const btn=document.getElementById('menuBtn');
       const menu=document.getElementById('mobileMenu');
       if(btn && menu){
@@ -363,7 +315,6 @@
         window.addEventListener('scroll',()=>menu.classList.remove('open'),{passive:true});
       }
 
-      // scroll reveal
       const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(!prefersReduced && 'IntersectionObserver' in window){
         const io = new IntersectionObserver((entries)=>{
