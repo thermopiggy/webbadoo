@@ -255,6 +255,16 @@ header video.logo{ object-fit: cover; max-height: none; }
   .topbar{ padding:.5rem .75rem; }
   body{ padding-top: 52px; }
 }
+/* FIX: видео-то да се вижда и на десктоп */
+@media (min-width: 1024px){
+  header video.logo{
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  header{ position: relative; }
+}
 
   </style>
 </head>
