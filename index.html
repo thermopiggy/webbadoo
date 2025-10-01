@@ -193,15 +193,14 @@
   border-radius: 8px;
 }
 
-/* за десктоп заменяме видеото с логото */
 @media (min-width: 992px) {
   .hero-video {
     display: none;
   }
   .hero-header {
     background: url("webbadoologo.png") no-repeat center center;
-    background-size: contain;
-    background-color: #000; /* фон зад логото */
+    background-size: cover; /* логото запълва целия хедър */
+    background-color: #000;
   }
 }
 
