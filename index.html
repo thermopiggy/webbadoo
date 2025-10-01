@@ -163,6 +163,48 @@
       #mobileMenu{top:52px}
       header{height:48vh; min-height:360px}
     }
+    .hero-header {
+  position: relative;
+  height: 300px; /* коригирай по вкус */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-overlay h1 {
+  color: #fff;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+/* за десктоп заменяме видеото с логото */
+@media (min-width: 992px) {
+  .hero-video {
+    display: none;
+  }
+  .hero-header {
+    background: url("webbadoologo.png") no-repeat center center;
+    background-size: contain;
+    background-color: #000; /* фон зад логото */
+  }
+}
+
   </style>
 </head>
 <body>
@@ -189,15 +231,14 @@
     <a href="#contacts">контакти</a>
   </nav>
 
-  <header>
-    <video class="logo" autoplay muted loop playsinline>
-      <source src="0823.mp4" type="video/mp4"/>
-      Вашият браузър не поддържа видео.
-    </video>
-    <div class="hero-overlay">
-      <h1 class="reveal reveal-up">Уеб решения за малкия бизнес</h1>
-    </div>
-  </header>
+<header class="hero-header">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="0823.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay">
+    <h1 class="reveal reveal-up">Уеб решения за малкия бизнес</h1>
+  </div>
+</header>
 
   <section class="container reveal reveal-up" id="services">
     <h2>УСЛУГИ</h2>
@@ -207,7 +248,7 @@
       <div class="service-card reveal reveal-up"><h3>WhatsApp бутон</h3><p>Поръчка в едно съобщение</p></div>
       <div class="service-card reveal reveal-up"><h3>Хостинг</h3><p>GitHub Pages – без месечни такси</p></div>
       <div class="service-card reveal reveal-up"><h3>Оптимизация</h3><p>Перфектен изглед на мобилни</p></div>
-      <div class="service-card reveal reveal-up">><h3>QR код</h3><p>Меню, стикери или визитки</p></div>
+      <div class="service-card reveal reveal-up"><h3>QR код</h3><p>Меню, стикери или визитки</p></div>
     </div>
   </section>
 
