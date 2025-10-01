@@ -163,14 +163,6 @@
       #mobileMenu{top:52px}
       header{height:48vh; min-height:360px}
     }
-    .hero-header {
-  position: relative;
-  height: 300px; /* коригирай по вкус */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
 
 .hero-video {
   position: absolute;
@@ -180,10 +172,18 @@
   object-fit: cover;
 }
 
-.hero-overlay {
+/* hero */
+.hero-header {
   position: relative;
-  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 420px;      /* вместо height:300px */
+  padding: 64px 16px;     /* “въздух” около текста */
+  overflow: visible;      /* да не реже h1/сянката */
 }
+
+.hero-overlay { position: relative; z-index: 2; }
 
 .hero-overlay h1 {
   color: #fff;
@@ -193,16 +193,17 @@
   border-radius: 8px;
 }
 
+/* десктоп: фон логото, повече височина и позиция на фона */
 @media (min-width: 992px) {
-  .hero-video {
-    display: none;
-  }
-  .hero-header {
-    background: url("webbadoologo.png") no-repeat center center;
-    background-size: cover; /* логото запълва целия хедър */
+  .hero-video { display: none; }
+  .hero-header{
+    background: url("webbadoologo.png") no-repeat center 30%;
+    background-size: cover;
     background-color: #000;
+    min-height: 520px;
   }
 }
+
 
   </style>
 </head>
