@@ -203,14 +203,25 @@
     min-height: 520px;
   }
 }
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
 
+.logo-img {
+  height: 50px;   /* регулирай според височината на навбара */
+  width: auto;
+}
 
   </style>
 </head>
 <body>
 
   <div class="topbar reveal reveal-down">
-    <div class="brand">webbadoo.com</div>
+   <a href="index.html" class="logo-link">
+  <img src="webbadoologo.png" alt="webbadoo logo" class="logo-img">
+</a>
     <nav class="nav" aria-label="Главно меню">
       <a href="#services">услуги</a>
       <a href="#projects">проекти</a>
