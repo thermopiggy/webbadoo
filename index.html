@@ -214,6 +214,21 @@
   width: auto;
 }
 
+    .status {
+  text-align:center;
+  margin: -0.3rem 0 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status.ready {
+  color: #2a8a1f; /* зелено */
+}
+
+.status.work {
+  color: #c27a00; /* оранжево */
+}
+
   </style>
 </head>
 <body>
@@ -268,6 +283,7 @@
     <div class="projects-grid">
       <div class="project-card reveal reveal-up">
         <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">
+          <p class="status ready">Готов</p>
           <img src="lhlogo.png" alt="LifeHouse" loading="lazy" width="600" height="220"/>
           <div class="overlay">Виж проекта</div>
         </a>
