@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="bg" class="theme-light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light dark"/>
+  <title>webbadoo.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg-grad-a:#bfbfbf;
+      --bg-grad-b:#e6e6e6;
+      --bg-grad-c:#ffffff;
+      --glass-bg: rgba(255,255,255,.6);
+      --glass-brd: rgba(0,0,0,.08);
+      --card:#ffffff;
+      --text:#111;
+      --muted:#555;
+      --btn-grad-a:#111; --btn-grad-b:#3a3a3a;
+      --overlay: rgba(0,0,0,.55);
+      --whatsapp:#25D366;
+    }
+    .theme-dark{
+      --bg-grad-a:#0f1216;
+      --bg-grad-b:#141922;
+      --bg-grad-c:#0e1014;
+      --glass-bg: rgba(18,22,28,.6);
+      --glass-brd: rgba(255,255,255,.08);
+      --card:#151a20;
+      --text:#e9eef5;
+      --muted:#b7c0cc;
+      --btn-grad-a:#1c2733; --btn-grad-b:#2b3b4d;
+      --overlay: rgba(0,0,0,.5);
+      --whatsapp:#1faa5a;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); overflow-x:hidden; padding-top:56px;
+      background: linear-gradient(270deg,var(--bg-grad-a),var(--bg-grad-b),var(--bg-grad-c));
+      background-size:600% 600%; animation:gradientMove 20s ease infinite;
+    }
+    @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    ::selection{background:#fff;color:#000}
+
+    .topbar{
+      position:fixed; inset:0 0 auto 0; height:56px; z-index:1000;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:.5rem 1rem; background:var(--glass-bg); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--glass-brd);
+    }
+    .brand{font-weight:700; letter-spacing:.3px}
+    .nav a{
+      display:inline-block; padding:.45rem .9rem; margin-left:.25rem;
+      text-decoration:none; color:var(--text); border:1px solid var(--glass-brd);
+      border-radius:999px; background:rgba(0,0,0,.04);
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .theme-dark .nav a{background:rgba(255,255,255,.06)}
+    .nav a:hover{transform:translateY(-1px); background:rgba(0,0,0,.08); border-color:#000}
+    .theme-dark .nav a:hover{background:rgba(255,255,255,.12); border-color:#fff}
+
+    .hamburger{display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd); background:rgba(0,0,0,.06)}
+    .theme-dark .hamburger{background:rgba(255,255,255,.06)}
+    .hamburger span{width:20px; height:2px; background:var(--text); position:relative; display:block; margin:0 auto}
+    .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text)}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    .theme-toggle{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd);
+      background:rgba(0,0,0,.06); cursor:pointer;
+    }
+    .theme-dark .theme-toggle{background:rgba(255,255,255,.06)}
+    .theme-toggle svg{width:20px; height:20px; fill:var(--text)}
+
+    #mobileMenu{
+      position:fixed; top:56px; left:0; right:0; z-index:999;
+      background:var(--glass-bg); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--glass-brd); transform:translateY(-110%);
+      transition:transform .2s ease;
+    }
+    #mobileMenu.open{transform:translateY(0)}
+    #mobileMenu a{display:block; padding:1rem; text-decoration:none; color:var(--text); border-top:1px solid var(--glass-brd)}
+
+    header{position:relative; height:60vh; min-height:420px; overflow:hidden; background:#000}
+    header video.logo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block !important}
+    .hero-overlay{
+      position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.8rem; text-align:center; padding:1rem; pointer-events:none;
+    }
+    .hero-overlay h1{margin:0; font-size:clamp(1.6rem,3.8vw,2.6rem); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.45)}
+    .hero-overlay p{margin:.1rem 0 .4rem; font-size:clamp(.95rem,2.3vw,1.1rem); color:#f3f3f3; opacity:.95}
+    .btn-cta{
+      pointer-events:auto; display:inline-block; padding:.75rem 1.25rem; border-radius:999px; font-weight:700; text-decoration:none; color:#fff;
+      background: linear-gradient(135deg,var(--btn-grad-a),var(--btn-grad-b)); box-shadow:0 6px 18px rgba(0,0,0,.15);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.18)}
+
+    .container{
+      max-width:860px; margin:2rem auto; padding:2rem 1.25rem; background:var(--card);
+      box-shadow:0 0 20px rgba(0,0,0,.08); border-radius:12px;
+    }
+    .theme-dark .container{box-shadow:0 0 20px rgba(0,0,0,.4)}
+
+    .services-grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:1.25rem;}
+    .service-card{background:var(--card); border-radius:12px; padding:1rem; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .theme-dark .service-card{box-shadow:0 2px 12px rgba(0,0,0,.5)}
+    .service-card .icon{font-size:1.9rem; line-height:1; margin-bottom:.5rem}
+    .service-card h3{margin:.2rem 0 .25rem; font-size:1.05rem}
+    .service-card p{margin:0; font-size:.92rem; color:var(--muted)}
+
+    .projects{max-width:1100px; margin:2rem auto; padding:0 12px}
+    .projects h2{text-align:center; margin-bottom:1.5rem}
+    .projects-grid{display:grid; gap:1.2rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .project-card{position:relative; overflow:hidden; border-radius:12px; background:var(--card); box-shadow:0 2px 10px rgba(0,0,0,.06); transition:transform .2s ease, box-shadow .2s ease}
+    .theme-dark .project-card{box-shadow:0 2px 10px rgba(0,0,0,.5)}
+    .project-card:hover{transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    .theme-dark .project-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.6)}
+    .project-card img{width:100%; height:220px; object-fit:contain; display:block; background:#fafafa; transition:transform .25s ease}
+    .theme-dark .project-card img{background:#0f141a}
+    .project-card:hover img{transform:scale(1.06)}
+    .project-card a.title{display:block; text-align:center; padding:.75rem; font-weight:700; color:var(--text); text-decoration:none}
+    .overlay{position:absolute; inset:0; background:var(--overlay); color:#fff; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .25s ease; font-size:1.05rem; font-weight:700; z-index:2; pointer-events:none}
+    .project-card:hover .overlay{opacity:1}
+
+    .cta{text-align:center; margin:2rem 0}
+    .cta a{background:var(--whatsapp); color:#fff; text-decoration:none; padding:1rem 2rem; font-size:1.05rem; border-radius:10px; display:inline-block}
+
+    footer{ text-align:center; font-size:.9rem; color:var(--muted); margin:2.5rem 0 1rem }
+
+    .contact-buttons{display:flex; flex-direction:column; gap:.6rem; margin-bottom:1.2rem;}
+    .btn-contact{display:inline-block; padding:.7rem 1rem; border-radius:8px; background:transparent; border:1px solid var(--glass-brd); text-decoration:none; color:var(--text); font-weight:500; transition:.2s ease;}
+    .btn-contact:hover{background:var(--text); color:#fff;}
+
+    .social-buttons{display:flex; justify-content:center; gap:1rem;}
+    .btn-social{width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--glass-brd); transition:.3s ease;}
+    .btn-social svg{width:22px; height:22px; fill:var(--muted); transition:.3s ease;}
+    .btn-social.fb:hover{background:#1877F2; border-color:#1877F2;}
+    .btn-social.fb:hover svg{fill:#fff;}
+    .btn-social.ig:hover{background:#E4405F; border-color:#E4405F;}
+    .btn-social.ig:hover svg{fill:#fff;}
+
+    .reveal{ opacity:0; transform:translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in{ opacity:1; transform:none; }
+    .reveal-up{ transform:translateY(24px); }
+    .reveal-right{ transform:translateX(24px); }
+    .reveal-left{ transform:translateX(-24px); }
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+      .reveal,.reveal-up,.reveal-right,.reveal-left{ opacity:1 !important; transform:none !important}
+    }
+
+    @media (max-width:768px){
+      body{padding-top:52px}
+      .topbar{height:52px; padding:.5rem .75rem}
+      .nav{display:none}
+      .hamburger{display:flex; align-items:center; justify-content:center}
+      #mobileMenu{top:52px}
+      header{height:48vh; min-height:360px}
+    }
+
+.hero-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* hero */
+.hero-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 420px;      /* вместо height:300px */
+  padding: 64px 16px;     /* “въздух” около текста */
+  overflow: visible;      /* да не реже h1/сянката */
+}
+
+.hero-overlay { position: relative; z-index: 2; }
+
+.hero-overlay h1 {
+  color: #fff;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+/* десктоп: фон логото, повече височина и позиция на фона */
+@media (min-width: 992px) {
+  .hero-video { display: none; }
+  .hero-header{
+    background: url("webbadoologo.png") no-repeat center 30%;
+    background-size: cover;
+    background-color: #000;
+    min-height: 520px;
+  }
+}
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 50px;   /* регулирай според височината на навбара */
+  width: auto;
+}
+
+    .status {
+  text-align:center;
+  margin: 0.6rem 0 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status.ready {
+  color: #2a8a1f; /* зелено */
+}
+
+.status.work {
+  color: #c27a00; /* оранжево */
+}
+
+        .btn-social.wa:hover {
+  background: #25D366;
+  border-color: #25D366;
+}
+.btn-social.wa:hover svg {
+  fill: #fff;
+}
+
+.btn-social.vb:hover {
+  background: #7360F2;
+  border-color: #7360F2;
+}
+.btn-social.vb:hover svg {
+  fill: #fff;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="topbar reveal reveal-down">
+   <a href="index.html" class="logo-link">
+  <img src="webbadoologo.png" alt="webbadoo logo" class="logo-img">
+</a>
+    <nav class="nav" aria-label="Главно меню">
+      <a href="#services">услуги</a>
+      <a href="#projects">проекти</a>
+      <a href="#contacts">контакти</a>
+    </nav>
+    <div style="display:flex; gap:.5rem; align-items:center">
+      <button class="theme-toggle" id="themeBtn" aria-label="Превключи тема">
+        <svg id="iconSun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm16 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1ZM5.636 5.636a1 1 0 0 1 1.414 0l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414Zm10.607 10.607a1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414Zm0-9.193a1 1 0 0 1 1.414-1.414l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707ZM5.636 17.364a1 1 0 0 1 1.414 0l.707.707A1 1 0 0 1 6.343 19.485l-.707-.707a1 1 0 0 1 0-1.414Z"/></svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
+      </button>
+      <button class="hamburger" id="menuBtn" aria-label="Отвори меню"><span></span></button>
+    </div>
+  </div>
+
+  <nav id="mobileMenu" aria-label="Мобилно меню">
+    <a href="#services">услуги</a>
+    <a href="#projects">проекти</a>
+    <a href="#contacts">контакти</a>
+  </nav>
+
+<header class="hero-header">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="0823.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay">
+    <h1 class="reveal reveal-up">Уеб решения за малкия бизнес</h1>
+  </div>
+</header>
+
+  <section class="container reveal reveal-up" id="services">
+    <h2>УСЛУГИ</h2>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-up"><h3>уебсайт</h3><p>Изработка и поддръжка на съвременен сайт</p></div>
+      <div class="service-card reveal reveal-up"><h3>AI чатбот</h3><p>Дизайн, интеграция, глас и аватар</p></div>
+      <div class="service-card reveal reveal-up"><h3>whatsapp и viber интеграции</h3><p>Поръчка в едно съобщение</p></div>
+      <div class="service-card reveal reveal-up"><h3>хостинг</h3><p>съобразен с изискванията на клиента</p></div>
+      <div class="service-card reveal reveal-up"><h3>оптимизация</h3><p> дизайн,съобразен с мобилни устройства</p></div>
+      <div class="service-card reveal reveal-up"><h3>стикери и визитки</h3><p>дизайн и печат</p></div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2 class="reveal reveal-up"> проекти</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/LifeHouse/" target="_blank" rel="noopener">
+          <img src="lhlogo.png" alt="LifeHouse" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/LifeHouse/" class="title" target="_blank" rel="noopener">LifeHouse</a>
+        <p class="status ready">Готов</p>
+      </div>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" target="_blank" rel="noopener">
+          <img src="penka.png" alt="Амигуруменичетата" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/amirugumi-wonders/index-bg.html" class="title" target="_blank" rel="noopener">Амигуруменичетата</a>
+        <p class="status work">В процес на изработка</p>
+      </div>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" target="_blank" rel="noopener">
+          <img src="qr2.png" alt="Планински билки Даутов" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/Pirinski-Bilki/#" class="title" target="_blank" rel="noopener">Планински билки Даутов</a>
+        <p class="status work">В процес на изработка</p>
+      </div>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/freestreamhub/" target="_blank" rel="noopener">
+          <img src="fshublogo.png" alt="FreeStreamHub" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/freestreamhub/" class="title" target="_blank" rel="noopener">FreeStreamHub</a>
+        <p class="status work">В процес на изработка</p>
+      </div>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/auto-tanev/" target="_blank" rel="noopener">
+          <img src="autotanevlogo.png" alt="Ауто Танев" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/auto-tanev/" class="title" target="_blank" rel="noopener">Ауто Танев</a>
+        <p class="status ready">Готов</p>
+      </div>
+      <div class="project-card reveal reveal-up">
+        <a href="https://thermopiggy.github.io/bulgaria-lord/" target="_blank" rel="noopener">
+          <img src="lodlogo.png" alt="Lord of the Drinks" loading="lazy" width="600" height="220"/>
+          <div class="overlay">Виж проекта</div>
+        </a>
+        <a href="https://thermopiggy.github.io/bulgaria-lord/" class="title" target="_blank" rel="noopener">Lord of the Drinks</a>
+         <p class="status work">В процес на изработка</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta reveal reveal-up">
+    <a href="https://wa.me/359988823462?text=Здравейте! Интересувам се от...." target="_blank" rel="noopener">Попитай в WhatsApp</a>
+  </div>
+
+  <section id="contacts" class="container reveal reveal-up" style="text-align:center">
+    <h2 style="margin-bottom:1rem;">Контакти</h2>
+    <div class="contact-buttons">
+      <a href="mailto:contact@webbadoo.com" class="btn-contact">contact@webbadoo.com</a>
+      <a href="tel:+359988823462" class="btn-contact">+359 988 823 462</a>
+    </div>
+<div class="social-buttons">
+  <a href="https://facebook.com/" target="_blank" class="btn-social fb" aria-label="Facebook">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 5 3.657 9.128 8.438 9.878v-6.987H8.078v-2.89h2.36V9.845c0-2.334 1.392-3.62 3.52-3.62.996 0 2.034.177 2.034.177v2.24h-1.146c-1.132 0-1.486.704-1.486 1.428v1.714h2.528l-.404 2.89h-2.124v6.987C18.343 21.128 22 17 22 12z"/>
+    </svg>
+  </a>
+
+  <a href="https://instagram.com/" target="_blank" class="btn-social ig" aria-label="Instagram">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.25a1.25 1.25 0 11-2.501 0 1.25 1.25 0 012.501 0z"/>
+    </svg>
+  </a>
+
+  <a href="https://wa.me/359988823462" target="_blank" class="btn-social wa" aria-label="WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M20.5 3.5A11.8 11.8 0 0 0 12 0a11.8 11.8 0 0 0-8.5 3.5A11.8 11.8 0 0 0 0 12c0 2 .5 3.9 1.5 5.6L0 24l6.7-1.7A12 12 0 0 0 12 24a11.8 11.8 0 0 0 8.5-3.5A11.8 11.8 0 0 0 24 12c0-3.2-1.2-6.2-3.5-8.5ZM12 21.3a9.3 9.3 0 0 1-4.7-1.3l-.3-.2-4 .9.9-3.9-.2-.3A9.3 9.3 0 1 1 21.3 12 9.2 9.2 0 0 1 12 21.3Zm5-6.8c-.3-.2-1.7-.9-1.9-1s-.4-.2-.6.2-.7 1-.9 1.2-.3.3-.6.1-1.2-.4-2.3-1.4a8.5 8.5 0 0 1-1.6-2c-.2-.3 0-.5.1-.7l.5-.6c.2-.3.3-.4.4-.7.1-.3 0-.5 0-.7l-.6-1.5c-.2-.4-.5-.5-.7-.5h-.6c-.3 0-.7.1-1 .5s-1.3 1.4-1.3 3.3 1.3 3.9 1.5 4.2 2.6 3.9 6.3 5.1c.9.3 1.6.5 2.1.6h1c.3 0 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.3-.2-.6-.4Z"/>
+    </svg>
+  </a>
+
+  <a href="viber://chat?number=%2B359988823462" target="_blank" class="btn-social vb" aria-label="Viber">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M17.5 1h-11A5.5 5.5 0 0 0 1 6.5v11A5.5 5.5 0 0 0 6.5 23h11a5.5 5.5 0 0 0 5.5-5.5v-11A5.5 5.5 0 0 0 17.5 1Zm3.5 16.5a3.5 3.5 0 0 1-3.5 3.5h-11a3.5 3.5 0 0 1-3.5-3.5v-11A3.5 3.5 0 0 1 6.5 3h11a3.5 3.5 0 0 1 3.5 3.5v11ZM16.7 14c-.3-.1-1.8-.9-2-.9s-.3-.1-.5.2l-.7.9c-.1.1-.2.2-.4.1s-1-.4-2-1.3a9.4 9.4 0 0 1-1.6-2c-.1-.2 0-.3.1-.4l.5-.6c.2-.3.3-.4.4-.6.1-.2 0-.4 0-.5L10 7c-.1-.3-.3-.4-.5-.5H8.9c-.3 0-.7.1-1 .5-.3.3-1.2 1.3-1.2 3.2s1.2 3.7 1.4 4 .8 1.2 1.8 2.2 2.9 1.9 4.1 2.2c.5.2.9.2 1.2.3h.5c.3 0 1.1-.4 1.3-1 .2-.6.2-1.1.2-1.2s-.2-.1-.5-.3Z"/>
+    </svg>
+  </a>
+</div>
+
+  </section>
+
+  <footer class="reveal reveal-up">&copy; 2025 – Уеб решения за малкия бизнес</footer>
+
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if(saved === 'dark' || (!saved && prefersDark)) root.classList.replace('theme-light','theme-dark');
+
+      const btnTheme = document.getElementById('themeBtn');
+      const iconSun = document.getElementById('iconSun');
+      const iconMoon = document.getElementById('iconMoon');
+      const syncIcons = () => {
+        const dark = root.classList.contains('theme-dark');
+        iconSun.style.display = dark ? 'none' : 'block';
+        iconMoon.style.display = dark ? 'block' : 'none';
+      };
+      syncIcons();
+      btnTheme.addEventListener('click', ()=>{
+        const dark = root.classList.toggle('theme-dark');
+        root.classList.toggle('theme-light', !dark);
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        syncIcons();
+      });
+
+      const btn=document.getElementById('menuBtn');
+      const menu=document.getElementById('mobileMenu');
+      if(btn && menu){
+        btn.addEventListener('click',()=>menu.classList.toggle('open'));
+        menu.addEventListener('click',e=>{if(e.target.tagName==='A') menu.classList.remove('open');});
+        window.addEventListener('keydown',e=>{if(e.key==='Escape') menu.classList.remove('open');});
+        window.addEventListener('scroll',()=>menu.classList.remove('open'),{passive:true});
+      }
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!prefersReduced && 'IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(en=>{
+            if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      }else{
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      }
+    })();
+  </script>
+</body>
+</html>
