@@ -246,6 +246,23 @@
   fill: #fff;
 }
 
+    @media (max-width: 991px) {
+  .hero-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* така остава зад съдържанието */
+  }
+
+  .hero-header {
+    background: transparent !important; /* маха статичен фон, оставя видеото */
+    min-height: 100vh;
+  }
+}
+
   </style>
 </head>
 <body>
