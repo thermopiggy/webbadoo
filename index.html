@@ -193,7 +193,6 @@
   border-radius: 8px;
 }
 
-/* десктоп: фон логото, повече височина и позиция на фона */
 @media (min-width: 992px) {
   .hero-video { display: none; }
   .hero-header{
@@ -201,8 +200,10 @@
     background-size: cover;
     background-color: #000;
     min-height: 520px;
+    background-attachment: fixed; /* прави фона "sticky" */
   }
 }
+
 .logo-link {
   display: flex;
   align-items: center;
